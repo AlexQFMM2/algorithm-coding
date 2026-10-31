@@ -51,6 +51,7 @@ async function screenshot(page,name){if(screenshots){await fs.mkdir(screenshots,
   await page.locator('#viz-restart').click();await page.locator('#viz-speed').selectOption('4');await page.locator('#viz-play').click();
   await page.waitForFunction(()=>!document.querySelector('#viz-step').textContent.startsWith('1 /'));await page.locator('#viz-play').click();const paused=await page.locator('#viz-step').textContent();await page.waitForTimeout(500);assert.equal(await page.locator('#viz-step').textContent(),paused);
   await page.keyboard.press('Escape');assert.equal(await page.locator('dialog').count(),0);
+  assert.equal(await page.evaluate(()=>document.activeElement.id),'visualize','return keyboard focus to the launcher');
   const after=await page.evaluate(()=>({code:ace.edit('code').getValue(),cursor:ace.edit('code').getCursorPosition(),scroll:document.querySelector('#document-content').scrollTop}));assert.deepEqual(after,before);
   assert((await fs.readFile(path.join(problem,'attempts/001.cpp'),'utf8')).includes('retained draft'));
   assert.deepEqual((await(await fetch(base+'/api/state')).json()).problems[0].stats,stats);

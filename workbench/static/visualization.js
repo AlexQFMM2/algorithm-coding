@@ -1,9 +1,9 @@
 // Owns the native modal and lazy loading; the player never owns the practice editor.
 export class Visualization {
   constructor(request) { this.request = request; this.dialog = null; }
-  async open(detail, initial) {
+  async open(detail, initial, returnFocus = document.activeElement) {
     if (this.dialog?.open) return;
-    const previous = document.activeElement;
+    const previous = returnFocus;
     const dialog = document.createElement('dialog');
     dialog.className = 'viz-dialog'; dialog.setAttribute('aria-labelledby', 'viz-title');
     const host = document.createElement('div'); host.className = 'viz-dialog__mount';

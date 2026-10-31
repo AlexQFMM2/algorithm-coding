@@ -286,7 +286,7 @@ $('#run').addEventListener('click', () => action(() => run($('#input-mode').valu
 $('#check').addEventListener('click', () => action(() => run('check')));
 $('#visualize').addEventListener('click', () => action(async () => {
   await save();
-  await visualization.open(state.detail, {initialInput: $('#stdin').value, initialMode: $('#input-mode').value, initialSample: Number($('#sample-select').value || 0)});
+  await visualization.open(state.detail, {initialInput: $('#stdin').value, initialMode: $('#input-mode').value, initialSample: Number($('#sample-select').value || 0)}, $('#visualize'));
 }));
 $('#new-attempt').addEventListener('click', () => action(async () => {
   await save(); const attempt = await api('/api/attempt/new', { problem: state.selected });
