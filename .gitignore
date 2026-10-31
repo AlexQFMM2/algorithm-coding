@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.DS_Store
+# 个人题库、练习、测试数据、历史和实施计划仅保留本机。
+/题库/
+/plan/
+# 运行快照和构建缓存不提交。
+**/runs/
+# 本地语言工具与诊断服务日志；练习代码仍在各题 attempts/ 下。
+.tools/
+.workbench/
+
+node_modules/

@@ -1,0 +1,55 @@
+.document-panel { display: flex; flex-direction: column; flex: 1; min-width: 0; min-height: 0; overflow: hidden; background: var(--color-sidebar); }
+.document-panel__toolbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; border-bottom: 1px solid var(--color-border); min-height: 49px; padding: 0 12px; flex-wrap: wrap; }
+.document-panel__tabs { display: flex; gap: 12px; }
+.document-panel__tab { background: transparent; padding: 14px 3px 12px; font-size: 13px; border-bottom: 2px solid transparent; color: var(--color-muted); white-space: nowrap; }
+.document-panel__tab[aria-selected="true"] { color: var(--color-primary); border-bottom-color: var(--color-primary); font-weight: 600; }
+.document-panel__toolbar select { max-width: 105px; font-size: 11px; border-color: transparent; color: var(--color-muted); padding-inline: 1px; }
+.document-panel__content { padding: 20px; overflow: auto; flex: 1; min-height: 0; }
+.document-panel__footer { display: flex; gap: 6px; align-items: center; padding: 8px 14px; border-top: 1px solid var(--color-border); color: var(--color-muted); font-size: 10px; overflow-wrap: anywhere; }
+.document-panel__footer .icon { width: 13px; height: 13px; }
+.markdown { line-height: 1.9; font-size: 14px; overflow-wrap: anywhere; }
+.markdown h1 { font-size: 21px; margin: 0 0 18px; line-height: 1.5; font-weight: 650; letter-spacing: -.4px; }
+.markdown h2 { font-size: 20px; margin: 0 0 18px; line-height: 1.6; }
+.markdown h3, .markdown h4 { font-size: 14px; margin: 20px 0 10px; }
+.markdown p { margin: 0 0 14px; white-space: pre-line; }
+.markdown pre { background: var(--color-canvas); border: 1px solid var(--color-border); padding: 12px 14px; border-radius: var(--radius-control); font-size: 12px; line-height: 1.75; color: var(--color-code); overflow: auto; white-space: pre; }
+.markdown :not(pre) > code { font-size: .9em; background: var(--color-canvas); color: var(--color-code); padding: 2px 4px; border-radius: 3px; }
+.markdown a { color: var(--color-primary); text-underline-offset: 3px; }
+.markdown ul, .markdown ol { padding-left: 22px; margin: 8px 0 16px; }
+.markdown li { margin-bottom: 6px; }
+.markdown blockquote { margin-left: 0; border-left: 3px solid var(--color-primary); padding-left: 14px; color: var(--color-muted); }
+.markdown__table { width: 100%; overflow: auto; margin-bottom: 16px; }
+.markdown table { border-collapse: collapse; font-size: 12px; min-width: 100%; }
+.markdown th, .markdown td { border: 1px solid var(--color-border); padding: 7px 9px; text-align: left; min-width: 70px; }
+.markdown th { background: var(--color-canvas); }
+.editor-panel { --editor-panel-line-height: 24px; --editor-panel-font-size: 14px; display: flex; flex-direction: column; flex: 1; min-height: 0; min-width: 0; border: 1px solid var(--color-border); border-radius: var(--radius-panel); background: var(--color-surface); overflow: hidden; }
+.editor-panel__toolbar { display: flex; align-items: center; gap: 12px; min-height: 40px; border-bottom: 1px solid var(--color-border); padding: 0 14px; background: var(--color-surface-soft); flex: none; }
+.editor-panel__language { display: flex; align-items: center; gap: 7px; color: var(--color-muted); white-space: nowrap; }
+.editor-panel__language strong { font-size: 12px; color: var(--color-text); font-weight: 500; }
+.editor-panel__toolbar select { font-size: 11px; padding: 3px 6px; min-height: 28px; }
+.editor-panel__save-state { color: var(--color-muted); font-size: 11px; margin-left: auto; white-space: nowrap; }
+.editor-panel__save-state[data-state="error"] { color: var(--color-danger); }
+.editor-panel__focus-hint { color: var(--color-muted); font-size: 11px; opacity: 0; }
+.editor-panel--focused .editor-panel__focus-hint { opacity: 1; }
+.editor-panel--focused .editor-panel__toolbar { box-shadow: inset 3px 0 var(--color-focus); }
+.editor-panel__path { font-size: 11px; font-family: var(--font-mono); color: var(--color-muted); padding: 4px 14px; overflow-wrap: anywhere; flex: none; }
+.editor-panel__body { display: flex; flex: 1; min-height: 0; overflow: hidden; }
+.editor-panel__canvas { width: 100%; height: 100%; min-height: 0; font: var(--editor-panel-font-size)/var(--editor-panel-line-height) var(--font-mono); }
+/* Ace's internal styling is confined to its owning editor component. */
+.editor-panel__canvas .ace_text-input:focus-visible { outline: none; }
+.editor-panel__canvas .ace_gutter { color: var(--color-muted); }
+.editor-panel__canvas.ace-one-dark .ace_comment { color: var(--color-muted); }
+.editor-panel__canvas .ace_marker-layer .ace_selection { background: var(--color-selection); }
+.editor-panel__canvas .ace_search { background: var(--color-surface-soft); color: var(--color-text); border-color: var(--color-border); max-width: 100%; }
+.editor-panel__canvas .ace_search_field { background: var(--color-surface); color: var(--color-text); border-color: var(--color-border); min-width: 0; width: 12em; }
+.editor-panel__canvas .ace_searchbtn, .editor-panel__canvas .ace_button { background: var(--color-surface); color: var(--color-text); border-color: var(--color-border); }
+.editor-panel__canvas .ace_searchbtn:hover, .editor-panel__canvas .ace_button:hover { background: var(--color-active); }
+.editor-panel__canvas .ace_button.checked { border-color: var(--color-primary); }
+.editor-panel__meta { padding: 4px 14px; display: flex; justify-content: space-between; gap: 8px; color: var(--color-muted); font-size: 10px; flex-wrap: wrap; border-bottom: 1px solid var(--color-border); flex: none; }
+.editor-panel__actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 12px; flex-wrap: wrap; flex: none; }
+.editor-panel__file-actions, .editor-panel__run-actions { display: flex; align-items: center; gap: 10px; }
+.editor-panel__file-actions { flex-wrap: wrap; min-width: 0; }
+.editor-panel__test-state { font-size: 11px; color: var(--color-muted); overflow-wrap: anywhere; max-width: 42ch; }
+.editor-panel__test-state[data-state="error"] { color: var(--color-danger); }
+@media (max-width: 1150px) { .document-panel__content { padding: 18px; } .document-panel__toolbar { padding: 0 10px; gap: 0; } .document-panel__tabs { gap: 8px; } .document-panel__toolbar select { font-size: 10px; max-width: 83px; } .editor-panel__toolbar { padding-inline: 10px; gap: 7px; } .editor-panel__actions { padding-inline: 10px; gap: 6px; } .editor-panel__file-actions, .editor-panel__run-actions { gap: 6px; } }
+@media (max-width: 650px) { .editor-panel__toolbar { gap: 7px; flex-wrap: wrap; padding-block: 6px; } .editor-panel__focus-hint { display: none; } .document-panel__toolbar select { max-width: 120px; } .document-panel__tabs { gap: 16px; } }

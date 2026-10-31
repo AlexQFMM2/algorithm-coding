@@ -1,0 +1,46 @@
+/* Sidebar owns its list/detail views; document content keeps its own styles. */
+.sidebar { display: flex; flex-direction: column; min-width: 0; min-height: 0; height: 100%; background: var(--color-sidebar); border-right: 1px solid var(--color-border); }
+.sidebar__topbar { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 16px; min-height: 61px; flex: none; }
+.sidebar__brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.sidebar__brand strong { font-size: 16px; color: var(--color-heading); font-weight: 550; }
+.sidebar__logo { display: grid; place-items: center; width: 29px; height: 29px; border-radius: 7px; color: var(--color-primary); background: var(--color-primary-soft); flex: none; }
+.sidebar__logo .icon { width: 19px; height: 19px; }
+.sidebar__navigation { display: flex; align-items: center; gap: 6px; padding: 7px 12px; border-block: 1px solid var(--color-border); flex: none; }
+.sidebar__toggle { display: inline-flex; align-items: center; gap: 5px; background: transparent; color: var(--color-muted); padding: 6px 4px; min-height: 32px; border-radius: 4px; font-size: 12px; }
+.sidebar__toggle:hover:not(:disabled) { background: var(--color-active); color: var(--color-heading); }
+.sidebar__toggle .icon { width: 15px; height: 15px; }
+.sidebar__problem-navigation { display: flex; margin-left: auto; gap: 2px; }
+.sidebar__sizing { display: flex; align-items: center; flex: none; gap: 10px; padding: 6px 14px; border-top: 1px solid var(--color-border); color: var(--color-muted); font-size: 11px; }
+.sidebar__sizing label { white-space: nowrap; }
+.sidebar__sizing input { min-width: 0; flex: 1; width: 100%; margin: 0; accent-color: var(--color-primary); cursor: pointer; }
+.sidebar__list-view { display: flex; flex-direction: column; flex: 1; min-height: 0; padding: 18px 14px 12px; }
+.sidebar__detail-view { display: flex; flex: 1; min-height: 0; }
+.sidebar__heading { display: flex; align-items: center; gap: 8px; padding: 0 5px 12px; color: var(--color-muted); font-size: 12px; font-weight: 550; }
+.sidebar__count { font: 11px var(--font-mono); color: var(--color-muted); background: var(--color-active); padding: 3px 6px; border-radius: 4px; }
+.sidebar__search { display: flex; align-items: center; gap: 8px; background: var(--color-surface-soft); border: 1px solid var(--color-border); border-radius: var(--radius-control); padding: 8px 10px; color: var(--color-muted); margin-bottom: 16px; }
+.sidebar__search input { min-width: 0; width: 100%; border: 0; background: transparent; font-size: 12px; }
+.sidebar__search:focus-within { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.sidebar__search input:focus { outline: none; }
+.sidebar__list { display: flex; flex-direction: column; gap: 5px; overflow-y: auto; padding: 3px; margin: -3px; }
+.sidebar__item { display: grid; grid-template-columns: 23px minmax(0, 1fr); gap: 10px; align-items: start; padding: 12px 11px; width: 100%; text-align: left; background: transparent; border: 1px solid transparent; border-radius: 4px; }
+.sidebar__item:hover { background: var(--color-surface-soft); }
+.sidebar__item[aria-current="page"] { color: var(--color-heading); background: var(--color-active); box-shadow: inset 2px 0 var(--color-primary); }
+.sidebar__number { font: 12px/24px var(--font-mono); color: var(--color-muted); }
+.sidebar__item strong { display: block; font-weight: 550; font-size: 14px; }
+.sidebar__item small { display: block; color: var(--color-muted); font-size: 11px; margin-top: 5px; }
+.sidebar__footer { margin-top: auto; border-top: 1px solid var(--color-border); padding: 16px 5px 0; display: flex; align-items: flex-start; gap: 9px; color: var(--color-muted); }
+.sidebar__footer > .icon { margin-top: 2px; }
+.sidebar__footer strong { font-size: 11px; font-weight: 500; }
+.sidebar__footer p { font-size: 10px; margin: 4px 0; }
+.sidebar__footer .text-button { padding-left: 0; font-size: 11px; }
+@media (max-width: 820px) {
+  .sidebar { height: auto; border-right: 0; border-bottom: 1px solid var(--color-border); }
+  .sidebar__topbar { min-height: 52px; padding: 8px 14px; }
+  .sidebar__navigation { padding: 5px 12px; }
+  .sidebar__sizing { display: none; }
+  .sidebar__detail-view { height: 340px; flex: none; }
+  .sidebar__list-view { max-height: 380px; padding: 12px; }
+  .sidebar__footer { display: none; }
+  .sidebar__search { margin-bottom: 10px; }
+  .sidebar__search input { font-size: 16px; }
+}

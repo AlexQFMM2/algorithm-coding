@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#21252b">
+  <title>算法练习室</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23256850'/%3E%3Cpath d='m25 20-12 12 12 12m14-24 12 12-12 12' fill='none' stroke='white' stroke-width='5'/%3E%3C/svg%3E">
+  <script src="/theme.js"></script>
+  <link rel="stylesheet" href="/vendor/ace/css/ace.css">
+  <link rel="stylesheet" href="/vendor/ace/css/theme/one_dark.css">
+  <link rel="stylesheet" href="/vendor/ace/css/theme/github_light_default.css">
+  <link rel="stylesheet" href="/styles/base.css">
+  <link rel="stylesheet" href="/styles/sidebar.css">
+  <link rel="stylesheet" href="/styles/workspace.css">
+  <link rel="stylesheet" href="/styles/intelligence.css">
+  <link rel="stylesheet" href="/styles/results.css">
+  <script defer src="/vendor/ace/ace.js"></script>
+  <script defer src="/vendor/ace/mode-c_cpp.js"></script>
+  <script defer src="/vendor/ace/ext-searchbox.js"></script>
+  <script defer src="/vendor/ace/ext-language_tools.js"></script>
+  <script defer src="/vendor/ace/theme-one_dark.js"></script>
+  <script defer src="/vendor/ace/theme-github_light_default.js"></script>
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <svg class="icon-definitions" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7V5h7l2 3h9v12H3V7Z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6M20 13v6H4V3h11"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24"><path d="m5 7 5 5-5 5m8 0h6"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5v15M3 4c4-1 6 0 9 2 3-2 5-3 9-2v15c-4-1-6 0-9 2-3-2-5-3-9-2V4Z"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7a9 9 0 1 0 1 8M20 3v5h-5"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="m10 6 6 6-6 6"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path d="m6 14 6-6 6 6"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 10 6 6 6-6"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1 1m12 12 1 1M5 19l1-1M18 6l1-1"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15a9 9 0 0 1-11-11 9 9 0 1 0 11 11Z"/></symbol>
+  </svg>
+  <a class="skip-link" href="#code">跳到代码编辑器</a>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="题目导航与详情">
+      <header class="sidebar__topbar">
+      <div class="sidebar__brand">
+        <span class="sidebar__logo"><svg class="icon"><use href="#i-code"/></svg></span>
+        <strong>算法练习室</strong>
+      </div>
+      <button id="theme-toggle" class="icon-button" aria-label="切换到浅色主题" title="切换到浅色主题"><svg class="icon" aria-hidden="true"><use id="theme-icon" href="#i-sun"/></svg></button>
+      </header>
+      <div class="sidebar__navigation">
+        <button id="sidebar-toggle" class="sidebar__toggle" disabled><svg class="icon" aria-hidden="true"><use id="sidebar-toggle-icon" href="#i-right"/></svg><span id="sidebar-toggle-label">题目详情</span></button>
+        <div class="sidebar__problem-navigation" aria-label="切换题目">
+          <button id="previous-problem" class="icon-button" aria-label="上一题" title="上一题" disabled><svg class="icon" aria-hidden="true"><use href="#i-left"/></svg></button>
+          <button id="next-problem" class="icon-button" aria-label="下一题" title="下一题" disabled><svg class="icon" aria-hidden="true"><use href="#i-right"/></svg></button>
+        </div>
+        <button id="refresh" class="icon-button" aria-label="刷新题目和文件" title="刷新题目和文件"><svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg></button>
+      </div>
+      <div id="sidebar-list-view" class="sidebar__list-view">
+      <div class="sidebar__heading"><span>我的题目</span><span id="problem-count" class="sidebar__count">0</span></div>
+      <label class="sidebar__search"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg><input id="search" type="search" placeholder="搜索题目…" aria-label="搜索题目"></label>
+      <nav id="problem-list" class="sidebar__list" aria-label="题目列表"><p class="muted">正在读取题目…</p></nav>
+      <div class="sidebar__footer">
+        <svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg>
+        <div><strong>文件就在你的仓库里</strong><p>代码、解析、每一次尝试。</p><button id="help" class="text-button">查看使用说明 <span aria-hidden="true">↗</span></button></div>
+      </div>
+      </div>
+      <div id="sidebar-detail-view" class="sidebar__detail-view" hidden>
+        <section class="document-panel" aria-label="题目与解析">
+          <div class="document-panel__toolbar"><div class="document-panel__tabs" role="tablist" aria-label="阅读内容">
+            <button class="document-panel__tab" role="tab" aria-selected="true" aria-controls="document-content" data-document="题目.md" id="tab-statement">题目</button>
+            <button class="document-panel__tab" role="tab" aria-selected="false" aria-controls="document-content" tabindex="-1" data-document="解析.md" id="tab-explanation">解析</button>
+            <button class="document-panel__tab" role="tab" aria-selected="false" aria-controls="document-content" tabindex="-1" data-document="main.cpp" id="tab-reference">参考代码</button>
+          </div><select id="extra-document" aria-label="更多资料"><option value="">更多资料</option></select></div>
+          <article id="document-content" class="document-panel__content markdown" role="tabpanel" aria-labelledby="tab-statement" tabindex="0"><p class="muted">正在打开题目…</p></article>
+          <footer class="document-panel__footer"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg><span id="document-path">题目和解析直接读取本地文件</span></footer>
+        </section>
+      </div>
+      <div class="sidebar__sizing">
+        <label for="sidebar-width">面板宽度</label>
+        <input id="sidebar-width" type="range" min="260" max="720" step="1" value="360">
+        <button id="sidebar-width-reset" class="text-button">重置</button>
+      </div>
+    </aside>
+    <div id="sidebar-resizer" class="workspace-splitter" role="separator" tabindex="0" aria-label="调整题目面板宽度" aria-orientation="vertical" aria-controls="sidebar" aria-valuemin="260" aria-valuemax="720" aria-valuenow="360" title="拖动调整宽度 · 方向键微调 · 双击恢复默认"></div>
+    <main class="workspace" id="main">
+      <header class="workspace__header">
+        <div class="workspace__title-row"><h1 id="problem-title">算法练习室</h1><span class="tag" id="problem-topic">本地练习</span><div id="problem-stats" class="practice-stats" role="status" aria-label="当前题目统计" aria-atomic="true" title="练习按保存的轮次计算；通过和失败按检查全部的次数计算，样例和手动运行不计入。" hidden><span>练习 <strong id="stat-practices">0</strong> 轮</span><span class="practice-stats__passed">通过 <strong id="stat-passed">0</strong> 次</span><span class="practice-stats__failed">失败 <strong id="stat-failed">0</strong> 次</span></div></div>
+        <button id="new-attempt" class="button button--secondary" disabled><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>新一轮练习</button>
+      </header>
+      <div id="notice" class="notice" role="alert" hidden></div>
+      <div class="workspace__panels">
+        <section class="editor-panel" aria-label="C++ 代码编辑器">
+          <div class="editor-panel__toolbar"><div class="editor-panel__language"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg><strong>C++ 17</strong></div><label class="sr-only" for="attempt-select">练习记录</label><select id="attempt-select" disabled></select><span class="editor-panel__focus-hint" aria-hidden="true">编辑中</span><span class="editor-panel__save-state" id="save-state" role="status">等待载入</span></div>
+          <div class="editor-panel__path" id="code-path">每一轮练习，都会单独保留。</div>
+          <div class="editor-panel__body"><div id="code" class="editor-panel__canvas" aria-label="C++ 练习代码" aria-describedby="editor-help"></div></div>
+          <div class="editor-panel__meta"><span id="cursor-position">行 1，列 1</span><button id="cpp-status" class="editor-intelligence__status" aria-expanded="false" aria-controls="cpp-problems">C++ 提示载入中…</button><span id="editor-help">Ctrl+Space 补全 · Ctrl+Shift+Space 参数 · F8 问题</span></div>
+          <div id="cpp-problems" class="editor-intelligence__problems" aria-label="C++ 代码问题" hidden></div>
+          <footer class="editor-panel__actions"><div class="editor-panel__file-actions"><button id="save" class="text-button" disabled>保存</button><button id="download" class="text-button" disabled>下载草稿</button><span id="test-suite-state" class="editor-panel__test-state" role="status">选择题目后读取测试数据</span></div><div class="editor-panel__run-actions"><button id="run" class="button button--secondary" disabled><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span id="run-label">运行样例</span></button><button id="check" class="button button--primary" disabled><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span id="check-label">检查全部</span></button></div></footer>
+        </section>
+      </div>
+      <div id="results-resizer" class="results-resizer" role="separator" tabindex="0" aria-label="调整运行区高度" aria-orientation="horizontal" aria-controls="results-panel" aria-valuemin="180" aria-valuemax="600" aria-valuenow="207" title="上下拖动调整运行区高度 · 方向键微调 · 双击恢复默认"></div>
+      <section class="results-panel" id="results-panel" aria-label="输入与运行结果">
+        <header class="results-panel__header"><h2><svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg>运行与检查</h2><span class="results-panel__scope">本地测试</span><label class="sr-only" for="run-history">历史运行日志</label><select id="run-history"><option value="">历史运行日志</option></select><div class="results-panel__size-controls" id="results-size-controls"><button id="results-taller" class="icon-button" aria-label="增大运行区" title="增大运行区"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg></button><button id="results-shorter" class="icon-button" aria-label="缩小运行区" title="缩小运行区"><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg></button></div><button id="toggle-results" class="text-button" aria-expanded="true" aria-controls="results-body">收起</button></header>
+        <div class="results-panel__body" id="results-body">
+          <div class="results-panel__input"><div class="results-panel__input-heading"><label for="stdin">程序输入</label><select id="input-mode" aria-label="输入来源"><option value="sample">题目样例</option><option value="manual">手动输入</option></select><select id="sample-select" aria-label="选择样例" hidden></select></div><textarea id="stdin" spellcheck="false" aria-label="程序输入" placeholder="在这里输入程序需要的数据" readonly></textarea><p id="input-hint">运行样例会同时比较预期输出。</p></div>
+          <div class="results-panel__output" id="result-content" aria-live="polite"><div class="results-panel__empty"><svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg><strong>写一点，跑一下。</strong><span>运行样例，或用自己的数据验证思路。</span></div></div>
+        </div>
+      </section>
+      <footer class="workspace__footer"><span><span class="connection-dot" aria-hidden="true"></span><span id="connection-state">本地工作区</span></span><span>每次运行自动留档 · 官方 AC 以 AcWing 提交为准</span></footer>
+    </main>
+  </div>
+  <div id="cpp-tooltip" class="editor-intelligence__tooltip" role="tooltip" hidden></div>
+</body>
+</html>

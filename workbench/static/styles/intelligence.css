@@ -1,0 +1,19 @@
+/* Diagnostics, parameter hints and the Ace-owned completion popup. */
+.editor-intelligence__status { padding: 0 3px; min-height: 20px; background: transparent; color: var(--color-muted); font-size: 11px; text-align: left; }
+.editor-intelligence__status:hover { color: var(--color-primary); }
+.editor-intelligence__status[data-state="error"] { color: var(--color-danger); }
+.editor-intelligence__problems { max-height: 110px; overflow: auto; flex: none; border-bottom: 1px solid var(--color-border); background: var(--color-surface-soft); padding: 5px 12px; }
+.editor-intelligence__problems p { margin: 5px 0; font-size: 12px; overflow-wrap: anywhere; }
+.editor-intelligence__problems button { display: block; width: 100%; padding: 6px; background: transparent; color: var(--color-text); text-align: left; font-size: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.editor-intelligence__problems button:hover { background: var(--color-active); }
+.editor-panel__canvas .editor-diagnostic--error, .editor-panel__canvas .editor-diagnostic--warning { position: absolute; border-bottom: 2px dotted var(--color-danger); }
+.editor-panel__canvas .editor-diagnostic--warning { border-color: var(--color-warning); }
+.editor-intelligence__tooltip { position: fixed; z-index: 200001; max-width: min(560px, calc(100vw - 16px)); max-height: 180px; overflow: auto; padding: 10px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-control); background: var(--color-surface-soft); color: var(--color-text); box-shadow: 0 4px 12px #0003; font: 12px/1.6 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; pointer-events: none; }
+.editor-intelligence__tooltip strong { color: var(--color-primary); background: var(--color-primary-soft); border-radius: 2px; }
+.editor-intelligence__tooltip small { display: block; margin-top: 5px; color: var(--color-muted); font: 11px/1.5 sans-serif; }
+body .ace_editor.ace_autocomplete { max-width: calc(100vw - 16px); background: var(--color-surface); color: var(--color-text); border-color: var(--color-border); }
+body .ace_editor.ace_autocomplete .ace_marker-layer .ace_active-line { background: var(--color-selection); }
+body .ace_editor.ace_autocomplete .ace_line-hover { border-color: var(--color-focus); background: transparent; }
+body .ace_editor.ace_autocomplete .ace_completion-highlight { color: var(--color-primary); }
+body .ace_editor.ace_autocomplete .ace_completion-meta { opacity: 1; color: var(--color-muted); }
+body .ace_tooltip.ace_doc-tooltip { max-width: min(420px, calc(100vw - 16px)); white-space: pre-wrap; overflow-wrap: anywhere; background: var(--color-surface-soft); color: var(--color-text); border-color: var(--color-border); }
