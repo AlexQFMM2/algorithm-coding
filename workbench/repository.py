@@ -217,6 +217,7 @@ class Repository:
             return {"revision": revision(source)}
 
     def detail(self, name):
+        from .visualization import describe_visualization
         with self.lock:
             path = self.problem(name)
             config = self.config(path)
@@ -227,6 +228,7 @@ class Repository:
             return {"id": name, "path": str(path.relative_to(self.root)), "title": config.get("title", name),
                     "topic": config.get("topic", "算法练习"), "samples": config.get("samples", []),
                     "test_suite": self.test_suite(name, len(config.get("samples", []))), "documents": documents,
+                    "visualization": describe_visualization(self, name),
                     "attempts": attempts,
                     "stats": practice_statistics(attempts, runs),
                     "attempt": self.read_attempt(name, attempts[0]["id"]) if attempts else None,

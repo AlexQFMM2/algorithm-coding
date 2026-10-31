@@ -15,6 +15,7 @@ from urllib.request import ProxyHandler, build_opener
 from .judge import Judge
 from .language import LanguageService
 from .repository import AppError, Repository
+from .visualization import VisualizationRunner, list_visualizations, read_visualization
 
 PUBLIC = Path(__file__).parent / "static"
 
@@ -25,6 +26,7 @@ class Server(ThreadingHTTPServer):
     def __init__(self, root, port):
         self.repository = Repository(root)
         self.judge = Judge(self.repository)
+        self.visualization = VisualizationRunner(self.repository, self.judge.lock)
         self.token = secrets.token_urlsafe(32)
         super().__init__(("127.0.0.1", port), Handler)
         self.language = LanguageService(self.repository)
@@ -88,6 +90,10 @@ class Handler(BaseHTTPRequestHandler):
                 return self.respond(repo.read_attempt(query.get("problem"), query.get("attempt")))
             if parsed.path == "/api/document":
                 return self.respond(repo.document(query.get("path", "")))
+            if parsed.path == "/api/visualizations":
+                return self.respond({"runs": list_visualizations(repo, query.get("problem"))})
+            if parsed.path == "/api/visualization":
+                return self.respond(read_visualization(repo, query.get("problem"), query.get("run")))
             if parsed.path == "/api/run":
                 return self.respond(repo.read_run(query.get("problem"), query.get("run")))
             filename = "index.html" if parsed.path == "/" else parsed.path.removeprefix("/")
@@ -126,6 +132,9 @@ class Handler(BaseHTTPRequestHandler):
             if self.path == "/api/attempt/save":
                 return self.respond(repo.save_attempt(payload.get("problem"), payload.get("attempt"),
                                                       payload.get("source"), payload.get("revision")))
+            if self.path == "/api/visualizations":
+                return self.respond(self.server.visualization.run(payload.get("problem"), payload.get("input_mode", "sample"),
+                                                                  payload.get("input", ""), payload.get("sample", 0)))
             if self.path == "/api/run":
                 return self.respond(self.server.judge.run(payload.get("problem"), payload.get("attempt"),
                                                           payload.get("revision"), payload.get("mode"),

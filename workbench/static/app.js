@@ -2,9 +2,11 @@ import { Editor } from './editor.js';
 import { renderMarkdown } from './documents.js';
 import { renderResult, resetResult, historyOptions } from './results.js';
 import { WorkspaceLayout } from './layout.js';
+import { Visualization } from './visualization.js';
 
 const $ = selector => document.querySelector(selector);
 const layout = new WorkspaceLayout();
+const visualization = new Visualization(api);
 const state = { problems: [], selected: null, detail: null, attempt: null, saved: '', token: '', busy: false, saveTask: null, timer: null, documentPath: '', documentRequest: 0, manualInput: new Map() };
 const editor = new Editor(() => {
   saveState('尚未保存');
@@ -62,6 +64,11 @@ function updateControls() {
   editor.readOnly = state.busy;
   if ($('#input-mode').value === 'sample' && !state.detail?.samples.length) $('#run').disabled = true;
   updateTestSuite();
+  const visual = state.detail?.visualization;
+  const legacyVisual = state.detail && !visual && state.detail.documents.some(doc => doc.name === "visualize.cpp");
+  $("#visualize").hidden = !visual?.configured && !legacyVisual;
+  $("#visualize").disabled = state.busy || !visual?.available;
+  $("#visualize").title = legacyVisual ? "请保存后重启服务并刷新，以启用算法演示。" : visual?.error || "逐步观察参考算法的执行过程";
   for (const button of document.querySelectorAll('.sidebar__item')) button.disabled = state.busy;
   const index = state.problems.findIndex(problem => problem.id === state.selected);
   for (const [id, offset, label] of [['previous-problem', -1, '上一题'], ['next-problem', 1, '下一题']]) {
@@ -166,6 +173,7 @@ function attemptOptions(attempts) {
 }
 
 async function selectProblem(id, attemptId = null) {
+  visualization.close();
   const detail = await api('/api/problem?id=' + encodeURIComponent(id));
   if (!detail.attempt) {
     detail.attempt = await api('/api/attempt/new', { problem: id, from_reference: true });
@@ -276,6 +284,10 @@ $('#stdin').addEventListener('input', () => state.manualInput.set(state.selected
 $('#save').addEventListener('click', () => action(save));
 $('#run').addEventListener('click', () => action(() => run($('#input-mode').value)));
 $('#check').addEventListener('click', () => action(() => run('check')));
+$('#visualize').addEventListener('click', () => action(async () => {
+  await save();
+  await visualization.open(state.detail, {initialInput: $('#stdin').value, initialMode: $('#input-mode').value, initialSample: Number($('#sample-select').value || 0)});
+}));
 $('#new-attempt').addEventListener('click', () => action(async () => {
   await save(); const attempt = await api('/api/attempt/new', { problem: state.selected });
   await selectProblem(state.selected, attempt.id); editor.focus();

@@ -1,0 +1,2 @@
+.log { max-height: 100px; overflow-y: auto; }
+.content { font-family: inherit; font-size: 13px; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.7; }

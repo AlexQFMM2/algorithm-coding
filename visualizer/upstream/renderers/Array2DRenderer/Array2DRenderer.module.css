@@ -1,0 +1,8 @@
+.array_2d { border-collapse: separate; border-spacing: 4px; font-family: var(--font-mono); }
+.row { height: 38px; }
+.col { min-width: 40px; padding: 4px 8px; text-align: center; border: 1px solid var(--color-border); border-radius: 4px; background: var(--color-surface-soft); white-space: nowrap; }
+.value { font-size: 14px; }
+.selected { background: var(--color-primary-soft); border-color: var(--color-primary); box-shadow: inset 0 -3px var(--color-primary); }
+.patched { border: 2px solid var(--color-warning); color: var(--color-warning); font-weight: 700; }
+.index { min-width: 40px; border-color: transparent; background: transparent; color: var(--color-muted); padding-bottom: 0; height: 22px; }
+.index .value { font-size: 11px; }

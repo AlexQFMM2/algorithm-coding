@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/styles/workspace.css">
   <link rel="stylesheet" href="/styles/intelligence.css">
   <link rel="stylesheet" href="/styles/results.css">
+  <link rel="stylesheet" href="/vendor/algorithm-visualizer/player.css">
   <script defer src="/vendor/ace/ace.js"></script>
   <script defer src="/vendor/ace/mode-c_cpp.js"></script>
   <script defer src="/vendor/ace/ext-searchbox.js"></script>
@@ -99,7 +100,7 @@
           <div class="editor-panel__body"><div id="code" class="editor-panel__canvas" aria-label="C++ 练习代码" aria-describedby="editor-help"></div></div>
           <div class="editor-panel__meta"><span id="cursor-position">行 1，列 1</span><button id="cpp-status" class="editor-intelligence__status" aria-expanded="false" aria-controls="cpp-problems">C++ 提示载入中…</button><span id="editor-help">Ctrl+Space 补全 · Ctrl+Shift+Space 参数 · F8 问题</span></div>
           <div id="cpp-problems" class="editor-intelligence__problems" aria-label="C++ 代码问题" hidden></div>
-          <footer class="editor-panel__actions"><div class="editor-panel__file-actions"><button id="save" class="text-button" disabled>保存</button><button id="download" class="text-button" disabled>下载草稿</button><span id="test-suite-state" class="editor-panel__test-state" role="status">选择题目后读取测试数据</span></div><div class="editor-panel__run-actions"><button id="run" class="button button--secondary" disabled><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span id="run-label">运行样例</span></button><button id="check" class="button button--primary" disabled><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span id="check-label">检查全部</span></button></div></footer>
+          <footer class="editor-panel__actions"><div class="editor-panel__file-actions"><button id="save" class="text-button" disabled>保存</button><button id="visualize" class="text-button" hidden disabled>算法演示</button><button id="download" class="text-button" disabled>下载草稿</button><span id="test-suite-state" class="editor-panel__test-state" role="status">选择题目后读取测试数据</span></div><div class="editor-panel__run-actions"><button id="run" class="button button--secondary" disabled><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span id="run-label">运行样例</span></button><button id="check" class="button button--primary" disabled><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span id="check-label">检查全部</span></button></div></footer>
         </section>
       </div>
       <div id="results-resizer" class="results-resizer" role="separator" tabindex="0" aria-label="调整运行区高度" aria-orientation="horizontal" aria-controls="results-panel" aria-valuemin="180" aria-valuemax="600" aria-valuenow="207" title="上下拖动调整运行区高度 · 方向键微调 · 双击恢复默认"></div>
